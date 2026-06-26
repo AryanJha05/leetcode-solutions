@@ -1,38 +1,38 @@
 class Solution {
     public void gameOfLife(int[][] board) {
         int rows = board.length, cols = board[0].length;
-        for (int row = 0; row < rows; row++) {
-            for (int col = 0; col < cols; col++) {
-                board[row][col] += neighbors(board, row, col) * 10;
+        for (int r = 0; r < rows; r++) {
+            for (int c = 0; c < cols; c++) {
+                board[r][c] += neighbors(board, r, c) * 10;
             }
         }
-        for (int row = 0; row < rows; row++) {
-            for (int col = 0; col < cols; col++) {
-                board[row][col] = calculateAliveOrDead(board[row][col]);
+        for (int r = 0; r < rows; r++) {
+            for (int c = 0; c < cols; c++) {
+                board[r][c] = calculateAliveOrDead(board[r][c]);
             }
         }
     }
 
-    private int neighbors(int[][] board, int row, int col) {
-        int result = 0;
-        boolean top = row - 1 >= 0;
-        boolean bottom = row + 1 < board.length;
-        boolean left = col - 1 >= 0;
-        boolean right = col + 1 < board[0].length;
+    private int neighbors(int[][] board, int r, int c) {
+        int res = 0;
+        boolean top = r - 1 >= 0;
+        boolean bottom = r + 1 < board.length;
+        boolean left = c - 1 >= 0;
+        boolean right = c + 1 < board[0].length;
         if (top) {
-            result += board[row - 1][col] % 10;
-            if (left) result += board[row - 1][col - 1] % 10;
-            if (right) result += board[row - 1][col + 1] % 10;
+            res += board[r - 1][c] % 10;
+            if (left) res += board[r - 1][c - 1] % 10;
+            if (right) res += board[r - 1][c + 1] % 10;
         }
         if (bottom) {
-            result += board[row + 1][col] % 10;
-            if (left) result += board[row + 1][col - 1] % 10;
-            if (right) result += board[row + 1][col + 1] % 10;
+            res += board[r + 1][c] % 10;
+            if (left) res += board[r + 1][c - 1] % 10;
+            if (right) res += board[r + 1][c + 1] % 10;
         }
-        if (left) result += board[row][col - 1] % 10;
-        if (right) result += board[row][col + 1] % 10;
+        if (left) res += board[r][c - 1] % 10;
+        if (right) res += board[r][c + 1] % 10;
 
-        return result;
+        return res;
     }
 
     private int calculateAliveOrDead(int cell) {
