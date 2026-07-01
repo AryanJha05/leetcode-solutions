@@ -18,17 +18,17 @@ class Solution {
 
         //for (String pattern : patterns) if (word.indexOf(pattern) != -1) count++;
 
-        //for (String pattern : patterns) if (isSubstring(word, pattern)) count++;
+        for (String pattern : patterns) if (isSubstring(word, pattern)) count++;
 
 
-        for (String pattern : patterns) {
-            for (int i = 0; i <= word.length() - pattern.length(); i++) {
-                if (word.startsWith(pattern, i)) {
-                    count++;
-                    break;
-                }
-            }
-        }
+        // for (String pattern : patterns) {
+        //     for (int i = 0; i <= word.length() - pattern.length(); i++) {
+        //         if (word.startsWith(pattern, i)) {
+        //             count++;
+        //             break;
+        //         }
+        //     }
+        // }
 
 
         return count;
