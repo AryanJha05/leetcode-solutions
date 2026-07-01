@@ -16,9 +16,9 @@ class Solution {
         int count = 0;
         // for(String pattern : patterns) if(word.contains(pattern)) count++;
 
-        //for (String pattern : patterns) if (word.indexOf(pattern) != -1) count++;
+        for (String pattern : patterns) if (word.indexOf(pattern) != -1) count++;
 
-        for (String pattern : patterns) if (isSubstring(word, pattern)) count++;
+        //for (String pattern : patterns) if (isSubstring(word, pattern)) count++;
 
 
         // for (String pattern : patterns) {
