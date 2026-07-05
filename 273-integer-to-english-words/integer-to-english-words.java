@@ -16,62 +16,56 @@ class Solution {
 
     public String numberToWords(int num) {
 
-        if(num == 0) return "Zero";
+        if (num == 0) return "Zero";
 
-        return helper(num).trim().replaceAll("\\s+", " ");
+        return helper(num).toString().trim();
     }
 
-    public String helper(int num) {
+    public StringBuilder helper(int num) {
 
         StringBuilder result = new StringBuilder();
 
         // Zero
-        if(num == 0) return "";
+        if (num == 0) return result;
 
         // Below 20
-        if(num < 20) return below20[num];
+        if (num < 20) result.append(below20[num]);
 
         // Tens
-        if(num < 100) {
-            result.append(tens[num / 10])
-                  .append(" ")
-                  .append(helper(num % 10));
+        else if (num < 100) {
+            result.append(tens[num / 10]);
 
-            return result.toString();
+            if (num % 10 != 0) result.append(" ").append(helper(num % 10));
         }
 
         // Hundred
-        if(num < 1000) {
-            result.append(helper(num / 100))
-                  .append(" Hundred ")
-                  .append(helper(num % 100));
+        else if (num < 1000) {
+            result.append(helper(num / 100)).append(" Hundred");
 
-            return result.toString();
+            if (num % 100 != 0) result.append(" ").append(helper(num % 100));
         }
 
         // Thousand
-        if(num < 1000000) {
-            result.append(helper(num / 1000))
-                  .append(" Thousand ")
-                  .append(helper(num % 1000));
+        else if (num < 1_000_000) {
+            result.append(helper(num / 1000)).append(" Thousand");
 
-            return result.toString();
+            if (num % 1000 != 0) result.append(" ").append(helper(num % 1000));
         }
 
         // Million
-        if(num < 1000000000) {
-            result.append(helper(num / 1000000))
-                  .append(" Million ")
-                  .append(helper(num % 1000000));
+        else if (num < 1_000_000_000) {
+            result.append(helper(num / 1_000_000)).append(" Million");
 
-            return result.toString();
+            if (num % 1_000_000 != 0) result.append(" ").append(helper(num % 1_000_000));
         }
 
         // Billion
-        result.append(helper(num / 1_000_000_000))
-              .append(" Billion ")
-              .append(helper(num % 1_000_000_000));
+        else {
+            result.append(helper(num / 1_000_000_000)).append(" Billion");
 
-        return result.toString();
+            if (num % 1_000_000_000 != 0) result.append(" ").append(helper(num % 1_000_000_000));
+        }
+
+        return result;
     }
 }
