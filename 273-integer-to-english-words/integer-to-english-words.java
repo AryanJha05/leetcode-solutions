@@ -23,25 +23,55 @@ class Solution {
 
     public String helper(int num) {
 
-        // Zero : 
+        StringBuilder result = new StringBuilder();
+
+        // Zero
         if(num == 0) return "";
 
-        // Below20:
+        // Below 20
         if(num < 20) return below20[num];
 
-        //tens :
-        if(num < 100) return tens[num/10] + " " + helper(num%10);
+        // Tens
+        if(num < 100) {
+            result.append(tens[num / 10])
+                  .append(" ")
+                  .append(helper(num % 10));
 
-        //hundred :
-        if(num < 1000) return helper(num/100) + " Hundred " + helper(num%100);
+            return result.toString();
+        }
 
-        //thoousand :
-        if(num < 1000000) return helper(num/1000) + " Thousand " + helper(num%1000);
+        // Hundred
+        if(num < 1000) {
+            result.append(helper(num / 100))
+                  .append(" Hundred ")
+                  .append(helper(num % 100));
 
-        //million
-        if(num < 1000000000) return helper(num/1000000) + " Million " + helper(num%1000000);
+            return result.toString();
+        }
 
-        //billion:
-        return helper(num/1_000000000) + " Billion " + helper(num%1000000000);
+        // Thousand
+        if(num < 1000000) {
+            result.append(helper(num / 1000))
+                  .append(" Thousand ")
+                  .append(helper(num % 1000));
+
+            return result.toString();
+        }
+
+        // Million
+        if(num < 1000000000) {
+            result.append(helper(num / 1000000))
+                  .append(" Million ")
+                  .append(helper(num % 1000000));
+
+            return result.toString();
+        }
+
+        // Billion
+        result.append(helper(num / 1_000_000_000))
+              .append(" Billion ")
+              .append(helper(num % 1_000_000_000));
+
+        return result.toString();
     }
 }
