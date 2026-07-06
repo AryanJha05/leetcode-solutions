@@ -12,9 +12,11 @@ class Solution {
 
         int ftCnt = 0, sdCnt = 0;
 
-        for(int i = 0; i < n / 2; i++) if(isVowel(s.charAt(i))) ftCnt++;
 
-        for(int i = n / 2; i < n; i++) if(isVowel(s.charAt(i))) sdCnt++;
+        for(int i = 0; i < n / 2; i++) {
+            if(isVowel(s.charAt(i))) ftCnt++;
+            if(isVowel(s.charAt(i+(n/2)))) sdCnt++;
+        }
 
         return ftCnt == sdCnt;
     }
