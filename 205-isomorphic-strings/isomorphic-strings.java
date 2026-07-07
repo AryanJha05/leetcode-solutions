@@ -2,8 +2,8 @@ class Solution {
     public boolean isIsomorphic(String s, String t) {
         if (s.length() != t.length()) return false;
 
-        int[] mapST = new int[256];
-        int[] mapTS = new int[256];
+        int[] mapST = new int[128];
+        int[] mapTS = new int[128];
 
         for (int i = 0; i < s.length(); i++) {
             char ch1 = s.charAt(i);
