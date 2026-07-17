@@ -4,19 +4,23 @@ class Solution {
 
         double sum = 0;
 
-        for(int i = 0; i < k; i++) sum += nums[i];
+        int i = 0;
+        while(i < k)  sum += nums[i++];
 
-        double maxAvg = sum;
+        double maxAvg = sum / k;
 
-        for(int i = k; i < n; i++){
+        i = 1;
+        while (i <= n - k) {
 
-            sum += nums[i];
-            sum -= nums[i-k];
+            sum -= nums[i - 1];
 
-            maxAvg = Math.max(maxAvg, sum);
+            sum += nums[i + k - 1];
+
+            maxAvg = Math.max(maxAvg, sum / k);
+
+            i++;
         }
 
-        
-        return maxAvg/k;
+        return maxAvg;
     }
 }
