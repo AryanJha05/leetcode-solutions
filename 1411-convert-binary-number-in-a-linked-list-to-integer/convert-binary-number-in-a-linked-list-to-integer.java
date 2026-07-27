@@ -12,31 +12,13 @@ class Solution {
     public int getDecimalValue(ListNode head) {
         
 
-        Stack<Integer> st = new Stack<>();
-
-        ListNode curr = head;
-
-        while(curr != null){
-            st.push(curr.val);
-
-            curr = curr.next;
-        }
-
         int res = 0;
-        int cnt = 0;
 
-        while(!st.isEmpty()){
+        while(head != null){
 
-            int num = st.pop();
+            res = res * 2 + head.val;
 
-            if(num == 0){
-                cnt++;
-                continue;
-            }
-
-            res += Math.pow(2, cnt);
-
-            cnt++;
+            head = head.next;
         }
 
         return res;
