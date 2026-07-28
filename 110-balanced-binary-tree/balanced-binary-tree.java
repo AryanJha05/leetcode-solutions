@@ -17,40 +17,26 @@
 
 class Solution {
 
-    boolean flag = true;
-
-    public int height(TreeNode root){
+    public int checkHeight(TreeNode root){
 
         if(root == null) return 0;
 
-        int left = height(root.left);
-        int right = height(root.right);
+        int left = checkHeight(root.left);
+        if(left == -1) return -1;
+
+        int right = checkHeight(root.right);
+        if(right == -1) return -1;
+
+        if(Math.abs(left - right) > 1) return -1;
 
         return Math.max(left, right) + 1;
-    }
-    
 
-    public void dfs(TreeNode root){
-
-        if(root == null) return;
-
-        int leftDepth = height(root.left);
-        int rightDepth = height(root.right);
-
-        if(Math.abs(leftDepth - rightDepth) > 1){
-            flag = false;
-            return;
-        }
-
-        dfs(root.left);
-        dfs(root.right);
     }
 
 
     public boolean isBalanced(TreeNode root) {
 
-        dfs(root);
+        return checkHeight(root) != -1;
 
-        return flag;
     }
 }
