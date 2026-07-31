@@ -25,7 +25,7 @@ class Solution {
 
         for (char ch : word.toCharArray()) freq[ch - 'a']++;
 
-        Arrays.sort(freq);
+        countingSort(freq);
 
         int res = 0;
 
