@@ -11,21 +11,21 @@
 class Solution {
     public ListNode swapNodes(ListNode head, int k) {
 
-        ArrayList<ListNode> arr = new ArrayList<>();
+        ListNode first = head;
+        for(int i = 1; i < k; i++) first = first.next;
 
-        ListNode temp = head;
+        ListNode ft_node = first;
 
-        while (temp != null) {
-            arr.add(temp);
-            temp = temp.next;
+        ListNode second = head;
+
+        while(first.next != null){
+            first = first.next;
+            second = second.next;
         }
 
-        ListNode first = arr.get(k - 1);
-        ListNode second = arr.get(arr.size() - k);
-
-        int val = first.val;
-        first.val = second.val;
-        second.val = val;
+        int temp = ft_node.val;
+        ft_node.val = second.val;
+        second.val = temp;
 
         return head;
     }
