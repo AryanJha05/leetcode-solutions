@@ -1,28 +1,39 @@
 class Solution {
 
-    int binarySearch(int[] nums, int target, boolean findFirst){
-        
-        int l = 0, h = nums.length-1;
-        int res = -1;
+    int lowerBound(int[] nums, int target) {
+        int low = 0, high = nums.length;
 
-        while(l <= h){
-            int mid = l + (h - l)/2;
+        while (low < high) {
+            int mid = low + (high - low) / 2;
 
-            if(nums[mid] == target){
-
-                res = mid;
-
-                if(findFirst) h = mid - 1;
-                else l = mid + 1;
-            }else if(nums[mid] > target) h = mid - 1;
-            else l = mid + 1;
+            if (nums[mid] < target) low = mid + 1;
+            else high = mid;
         }
 
-        return res;
+        return low;
+    }
+
+    int upperBound(int[] nums, int target) {
+        int low = 0, high = nums.length;
+
+        while (low < high) {
+            int mid = low + (high - low) / 2;
+
+            if (nums[mid] <= target) low = mid + 1;
+            else high = mid;
+        }
+
+        return low;
     }
 
     public int[] searchRange(int[] nums, int target) {
 
-        return new int[]{binarySearch(nums, target, true), binarySearch(nums, target, false)};
+        int first = lowerBound(nums, target);
+
+        if (first == nums.length || nums[first] != target) return new int[]{-1, -1};
+
+        int last = upperBound(nums, target) - 1;
+
+        return new int[]{first, last};
     }
 }
