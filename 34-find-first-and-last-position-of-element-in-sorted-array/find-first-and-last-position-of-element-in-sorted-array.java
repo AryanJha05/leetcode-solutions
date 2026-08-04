@@ -1,50 +1,28 @@
 class Solution {
 
-    public static int binaryLeft(int[] arr, int target) {
+    int binarySearch(int[] nums, int target, boolean findFirst){
+        
+        int l = 0, h = nums.length-1;
+        int res = -1;
 
-        int low = 0;
-        int high = arr.length - 1;
-        int ans = -1;
+        while(l <= h){
+            int mid = l + (h - l)/2;
 
-        while (low <= high) {
+            if(nums[mid] == target){
 
-            int mid = low + (high - low) / 2;
+                res = mid;
 
-            if (arr[mid] == target) {
-                ans = mid;
-                high = mid - 1;
-            } 
-            else if (arr[mid] < target) low = mid + 1;
-            else high = mid - 1;
-
+                if(findFirst) h = mid - 1;
+                else l = mid + 1;
+            }else if(nums[mid] > target) h = mid - 1;
+            else l = mid + 1;
         }
 
-        return ans;
-    }
-
-    public static int binaryRight(int[] arr, int target) {
-
-        int low = 0;
-        int high = arr.length - 1;
-        int ans = -1;
-
-        while (low <= high) {
-
-            int mid = low + (high - low) / 2;
-
-            if (arr[mid] == target) {
-                ans = mid;
-                low = mid + 1;
-            } 
-            else if (arr[mid] < target) low = mid + 1;
-            else high = mid - 1;
-        }
-
-        return ans;
+        return res;
     }
 
     public int[] searchRange(int[] nums, int target) {
 
-        return new int[]{binaryLeft(nums, target), binaryRight(nums,target)};
+        return new int[]{binarySearch(nums, target, true), binarySearch(nums, target, false)};
     }
 }
