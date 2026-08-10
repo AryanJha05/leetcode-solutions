@@ -10,7 +10,7 @@ class Solution {
 
             int mid = l + (r - l) / 2;
 
-            if(arr[mid] > arr[mid + 1]){
+            if(mid < n - 1 && arr[mid] > arr[mid + 1]){
                 res = mid;
                 r = mid - 1;
             }else l = mid + 1;
