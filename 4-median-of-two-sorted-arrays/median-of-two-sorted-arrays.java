@@ -3,29 +3,32 @@ class Solution {
         
         int n = nums1.length;
         int m = nums2.length;
+        
+        if(n > m) return findMedianSortedArrays(nums2, nums1);
 
-        int t = n + m;
+        int l = 0, r = n;
 
-        int i = 0, j = 0;
+        while(l <= r){
+            int cut1 = (l + r) / 2;
+            int cut2 = (m + n + 1) / 2 - cut1;
 
-        int prev = 0, curr = 0;
+            int l1 = (cut1 == 0) ? Integer.MIN_VALUE : nums1[cut1 - 1];
 
-        for(int cnt = 0; cnt <= t/2; cnt++){
+            int r1 = (cut1 == n) ? Integer.MAX_VALUE : nums1[cut1];
 
-            prev = curr;
+            int l2 = (cut2 == 0) ? Integer.MIN_VALUE : nums2[cut2 - 1];
 
-            if(i < n && (j >= m || nums1[i] <= nums2[j])){
-                curr = nums1[i];
-                i++;
-            }else{
-                curr = nums2[j];
-                j++;
+            int r2 = (cut2 == m) ? Integer.MAX_VALUE : nums2[cut2];
+
+            if (l1 <= r2 && l2 <= r1) {
+                if ((n + m) % 2 == 0) return (Math.max(l1, l2) + Math.min(r1, r2)) / 2.0;
+                else return Math.max(l1, l2);
             }
+            else if (l1 > r2) r = cut1 - 1;
+            else l= cut1 + 1;
+
         }
 
-        if(t % 2 == 0) return (prev + curr)/2.0;
-
-        return curr;
-
+        return 0.0;
     }
 }
