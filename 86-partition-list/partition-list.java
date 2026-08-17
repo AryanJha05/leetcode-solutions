@@ -22,10 +22,10 @@ class Solution {
         while(curr != null){
 
             if(curr.val < x){
-                before.next = new ListNode(curr.val);
+                before.next = curr;
                 before = before.next;
             }else{
-                after.next = new ListNode(curr.val);
+                after.next = curr;
                 after = after.next;
             }
 
