@@ -1,11 +1,6 @@
 class Solution {
-    public List<String> letterCombinations(String digits) {
 
-        List<String> res = new ArrayList<>();
-
-        if (digits.length() == 0)
-            return res;
-
+    public String getLetters(char digit){
         String[] keys = {
                 "",
                 "",
@@ -19,65 +14,37 @@ class Solution {
                 "wxyz"
         };
 
-        if (digits.length() == 1) {
-            int a = digits.charAt(0) - '0';
+        return keys[digit - '0'];
+    }
 
-            for (int i = 0; i < keys[a].length(); i++) {
-                res.add("" + keys[a].charAt(i));
-            }
+    public void backtrack(String digits, int idx, StringBuilder curr, List<String> res){
+
+        if(idx == digits.length()){
+            res.add(curr.toString());
+            return;
         }
 
-        else if (digits.length() == 2) {
-            int a = digits.charAt(0) - '0';
-            int b = digits.charAt(1) - '0';
+        String letters = getLetters(digits.charAt(idx));
 
-            for (int i = 0; i < keys[a].length(); i++) {
-                for (int j = 0; j < keys[b].length(); j++) {
+        for(int i = 0; i < letters.length(); i++){
 
-                    res.add("" + keys[a].charAt(i)
-                            + keys[b].charAt(j));
-                }
-            }
+            curr.append(letters.charAt(i));
+
+            backtrack(digits, idx + 1, curr, res);
+
+            curr.deleteCharAt(curr.length() - 1);
         }
+    }
 
-        else if (digits.length() == 3) {
-            int a = digits.charAt(0) - '0';
-            int b = digits.charAt(1) - '0';
-            int c = digits.charAt(2) - '0';
+    public List<String> letterCombinations(String digits) {
 
-            for (int i = 0; i < keys[a].length(); i++) {
-                for (int j = 0; j < keys[b].length(); j++) {
-                    for (int k = 0; k < keys[c].length(); k++) {
+        List<String> res = new ArrayList<>();
 
-                        res.add("" + keys[a].charAt(i)
-                                + keys[b].charAt(j)
-                                + keys[c].charAt(k));
-                    }
-                }
-            }
-        }
+        if(digits.length() == 0) return res;
 
-        else if (digits.length() == 4) {
-            int a = digits.charAt(0) - '0';
-            int b = digits.charAt(1) - '0';
-            int c = digits.charAt(2) - '0';
-            int d = digits.charAt(3) - '0';
+        backtrack(digits, 0, new StringBuilder(), res);
 
-            for (int i = 0; i < keys[a].length(); i++) {
-                for (int j = 0; j < keys[b].length(); j++) {
-                    for (int k = 0; k < keys[c].length(); k++) {
-                        for (int l = 0; l < keys[d].length(); l++) {
+        return res;      
 
-                            res.add("" + keys[a].charAt(i)
-                                    + keys[b].charAt(j)
-                                    + keys[c].charAt(k)
-                                    + keys[d].charAt(l));
-                        }
-                    }
-                }
-            }
-        }
-
-        return res;
     }
 }
