@@ -1,15 +1,9 @@
 class Solution {
 
-    public int sum(List<Integer> arr){
-        int sum = 0;
-        for(int x : arr) sum += x;
-        return sum;
-    }
-
     public void backtrack(int[] candidates, int target, int idx, List<Integer> curr, List<List<Integer>> res){
         
-        if(sum(curr) > target) return;
-        if(sum(curr) == target){
+        if(target < 0) return;
+        if(target == 0){
             res.add(new ArrayList<>(curr));
             return;
         }
@@ -18,7 +12,7 @@ class Solution {
 
             curr.add(candidates[i]);
 
-            backtrack(candidates, target, i, curr, res);
+            backtrack(candidates, target - candidates[i], i, curr, res);
 
             curr.remove(curr.size() - 1);
         }
