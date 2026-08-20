@@ -11,6 +11,7 @@ class Solution {
         for(int i = idx; i < arr.length; i++){
 
             if(i > idx && arr[i] == arr[i - 1]) continue;
+            if(arr[i] > target) break;
 
             curr.add(arr[i]);
 
