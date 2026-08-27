@@ -7,32 +7,34 @@ class Solution {
         if (s.length() < p.length()) return res;
 
         HashMap<Character, Integer> pMap = new HashMap<>();
-        HashMap<Character, Integer> window = new HashMap<>();
-
         for (char ch : p.toCharArray()) pMap.put(ch, pMap.getOrDefault(ch, 0) + 1);
-        
 
         int k = p.length();
-
         int l = 0;
+        int cnt = k;
 
         for (int r = 0; r < s.length(); r++) {
 
             char ch = s.charAt(r);
-            window.put(ch, window.getOrDefault(ch, 0) + 1);
+
+            if (pMap.containsKey(ch)) {
+                if (pMap.get(ch) > 0) cnt--;
+
+                pMap.put(ch, pMap.get(ch) - 1);
+            }
 
             if (r - l + 1 > k) {
-
                 char remove = s.charAt(l);
+                if (pMap.containsKey(remove)) {
+                    pMap.put(remove, pMap.get(remove) + 1);
 
-                window.put(remove, window.get(remove) - 1);
-
-                if(window.get(remove) == 0) window.remove(remove);
+                    if (pMap.get(remove) > 0) cnt++;
+                }
 
                 l++;
             }
 
-            if (r - l + 1 == k && window.equals(pMap)) res.add(l);
+            if (cnt == 0) res.add(l);
         }
 
         return res;
