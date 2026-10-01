@@ -8,6 +8,11 @@ class Solution {
 
         if(dp[i][j] != -1) return dp[i][j];
 
+        if(i == m - 1) return dp[i][j] = grid[i][j] + solve(i, j + 1, m, n, grid, dp);
+
+        if(j == n - 1) return dp[i][j] = grid[i][j] + solve(i + 1, j, m, n, grid, dp);
+
+
         return dp[i][j] = grid[i][j] + Math.min(solve(i + 1, j, m, n, grid, dp),
                                                 solve(i, j + 1, m, n, grid, dp));
     }
