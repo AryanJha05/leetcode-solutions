@@ -1,11 +1,13 @@
 class Solution {
 
-    public void backtrack(int n, boolean[] used, List<Integer> curr, List<List<Integer>> list){
+    public void backtrack(int n, boolean[] used, List<Integer> curr, List<List<Integer>> list, int k){
 
         if(curr.size() == n){
             list.add(new ArrayList<>(curr));
             return;
         }
+
+        if(list.size() == k) return;
 
         for(int i = 1; i <= n; i++){
 
@@ -14,7 +16,7 @@ class Solution {
             used[i] = true;
             curr.add(i);
 
-            backtrack(n, used, curr, list);
+            backtrack(n, used, curr, list, k);
 
             curr.remove(curr.size() - 1);
             used[i] = false;
@@ -26,10 +28,10 @@ class Solution {
         
         boolean[] used = new boolean[n + 1];
 
-        backtrack(n, used, new ArrayList<>(), list);
+        backtrack(n, used, new ArrayList<>(), list, k);
 
         StringBuilder res = new StringBuilder();
-        for(int x : list.get(k - 1)) res.append(x);
+        for(int x : list.get(list.size() - 1)) res.append(x);
 
         return res.toString();
     }
