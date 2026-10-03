@@ -2,12 +2,12 @@ class Solution {
 
     public void backtrack(int n, boolean[] used, List<Integer> curr, List<List<Integer>> list, int k){
 
+        if(list.size() == k) return;
+
         if(curr.size() == n){
             list.add(new ArrayList<>(curr));
             return;
         }
-
-        if(list.size() == k) return;
 
         for(int i = 1; i <= n; i++){
 
